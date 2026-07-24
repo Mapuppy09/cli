@@ -1,0 +1,70 @@
+# Snyk Configuration File
+# https://docs.snyk.io/features/snyk-cli/configure-the-snyk-cli
+
+# Snyk policy configuration
+version: v1.25.0
+
+# Vulnerability scanning settings
+vulnerability:
+  # Minimum severity level to report
+  min-severity: low
+  
+  # Enable/disable specific checks
+  enable-checks:
+    - dependencies
+    - code
+    - sca
+
+# Dependency scanning
+dependencies:
+  # Scan development dependencies
+  dev: true
+  
+  # Ignore missing lock files
+  ignore-missing-lockfiles: false
+
+# Code analysis
+code:
+  # Enable SAST (Static Application Security Testing)
+  enabled: true
+  
+  # Severity threshold
+  severity: high
+
+# Ignoring vulnerabilities
+# Use this section to ignore known issues with reasons
+ignore:
+  # Example: Ignore a specific CVE with reason
+  # CVE-2021-23337:
+  #   reason: "False positive - not affected"
+  #   expires: "2025-07-24"
+
+# Exclude patterns
+exclude:
+  # Don't scan node_modules
+  - node_modules/**
+  
+  # Don't scan dist
+  - dist/**
+  
+  # Don't scan test files
+  - "**/*.test.js"
+  - "**/*.spec.js"
+  
+  # Don't scan examples
+  - examples/**
+
+# License scanning (optional)
+license:
+  enabled: false
+
+# Reporting
+reporting:
+  # Report format: json, json-legacy, or sarif
+  format: json
+  
+  # Include vulnerability descriptions
+  include-descriptions: true
+  
+  # Include recommendations
+  include-remediation: true
