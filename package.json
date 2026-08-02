@@ -259,5 +259,8 @@
   "license": "Artistic-2.0",
   "engines": {
     "node": "^18.17.0 || >=20.5.0"
+  },
+  "overrides": {
+    "sigstore": "4.1.1"
   }
 }
