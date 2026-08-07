@@ -46,14 +46,14 @@
     "tap": "^16.3.8"
   },
   "dependencies": {
-    "@npmcli/arborist": "^7.5.4",
+    "@npmcli/arborist": "^9.0.0",
     "@npmcli/installed-package-contents": "^2.1.0",
     "binary-extensions": "^2.3.0",
-    "diff": "^5.1.0",
+    "diff": "^8.0.3",
     "minimatch": "^9.0.4",
     "npm-package-arg": "^11.0.2",
-    "pacote": "^18.0.6",
-    "tar": "^6.2.1"
+    "pacote": "^21.0.1",
+    "tar": "^7.5.4"
   },
   "templateOSS": {
     "//@npmcli/template-oss": "This file is partially managed by @npmcli/template-oss. Edits may be overwritten.",
