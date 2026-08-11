@@ -17,6 +17,11 @@ on:
   schedule:
     - cron: '0 2 * * *'
 
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
 jobs:
   security:
     runs-on: ubuntu-latest
@@ -24,11 +29,11 @@ jobs:
     steps:
       # Check out code
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       # Set up Node.js
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
@@ -39,18 +44,24 @@ jobs:
       
       # Run Snyk scan
       - name: Run Snyk scan
-        uses: snyk/actions/node@master
+        id: snyk
+        uses: snyk/actions/node@v1.0.0
+        continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=high
+          args: --file=package-lock.json --package-manager=npm --severity-threshold=high --sarif-file-output=snyk.sarif
       
       # Upload results to GitHub Security tab
       - name: Upload Snyk results
-        uses: github/codeql-action/upload-sarif@v2
-        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && hashFiles('snyk.sarif') != ''
         with:
           sarif_file: snyk.sarif
+
+      - name: Fail if Snyk scan found issues
+        if: steps.snyk.outcome == 'failure'
+        run: exit 1
 
   # Dependency check
   dependency-check:
@@ -58,10 +69,10 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
@@ -76,10 +87,10 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: 'npm'
