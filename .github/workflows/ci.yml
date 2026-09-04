@@ -181,6 +181,7 @@ jobs:
 
   windows-shims:
     name: Windows Shims Tests
+    if: github.repository_owner == 'npm'
     runs-on: windows-latest
     defaults:
       run:
