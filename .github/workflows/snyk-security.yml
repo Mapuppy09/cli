@@ -39,7 +39,7 @@ jobs:
       
       # Run Snyk scan
       - name: Run Snyk scan
-        uses: snyk/actions/node@master
+        uses: snyk/actions/node@v1.0.0
         continue-on-error: true
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
