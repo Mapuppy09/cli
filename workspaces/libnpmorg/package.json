@@ -28,10 +28,10 @@
   ],
   "devDependencies": {
     "@npmcli/eslint-config": "^4.0.0",
-    "@npmcli/template-oss": "4.22.0",
+    "@npmcli/template-oss": "4.30.0",
     "minipass": "^7.1.1",
     "nock": "^13.3.3",
-    "tap": "^16.3.8"
+    "tap": "^21.7.5"
   },
   "repository": {
     "type": "git",
