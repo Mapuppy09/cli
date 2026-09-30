@@ -1,0 +1,4 @@
+- name: Run Production Audit
+  run: {{ rootNpmPath }} audit --omit=dev
+- name: Run Full Audit
+  run: {{ rootNpmPath }} audit --audit-level=none
