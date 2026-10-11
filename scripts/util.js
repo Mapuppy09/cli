@@ -127,14 +127,16 @@ const npm = spawn.create('node', '.')
 npm.query = (...args) => npm('query', ...args, { out: true }).then(JSON.parse)
 
 const git = spawn.create('git')
-git.dirty = () => npmGit.isClean({ cwd: CWD }).then(async r => {
-  if (r) {
+git.dirty = async () => {
+  const status = await git('status', '--porcelain=v1', '-uno', '--', '.', ':(exclude)node_modules/**')
+  if (!status) {
     return 'git clean'
   }
+
   await git('status', '--porcelain=v1', '-uno')
-  await git('--no-pager', 'diff')
+  await git('--no-pager', 'diff', '--', '.', ':(exclude)node_modules/**')
   throw new Error('git dirty')
-})
+}
 
 const gh = spawn.create('gh')
 gh.json = async (..._args) => {
