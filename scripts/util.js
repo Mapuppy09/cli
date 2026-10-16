@@ -128,7 +128,7 @@ npm.query = (...args) => npm('query', ...args, { out: true }).then(JSON.parse)
 
 const git = spawn.create('git')
 git.dirty = async () => {
-  const status = await git('status', '--porcelain=v1', '-uno', '--', '.', ':(exclude)node_modules/**')
+  const status = await git('status', '--porcelain=v1', '-uno', '--', '.', ':(exclude)node_modules/**', { out: true })
   if (!status) {
     return 'git clean'
   }
